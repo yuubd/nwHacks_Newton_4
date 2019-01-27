@@ -1,44 +1,33 @@
 import { userConstants } from '../_constants/userConstants.js';
-import history from '../_helpers/history';
+import { sendRequestWithJWTAuthHeaderAsync } from '../_helpers/http';
 
 export const userActions = {
 	login,
 	logout,
-	signUp
+	register
 };
 
 function login(email, password) {
 	return (dispatch) => {
 		dispatch(request({ email }));
 
-		localStorage.setItem('user', JSON.stringify(email));
+		// localStorage.setItem('user', JSON.stringify(email));
 
-		dispatch(success({ email }));
+		const body = JSON.stringify({ email, password });
 
-		// history.push('../dashboard');
-		window.location.href = '../dashboard';
+		const uri = '/login';
 
-		// const token = {
-		// 	method: 'post',
-		// 	headers: { 'Content-Type': 'application/json' },
-		// 	body: JSON.stringify({ email, password })
-		// };
-
-		// fetch('http://localhost:3001/login', token)
-		// 	.then((res) => {
-		// 		console.log(res);
-		// 		return res.json();
-		// 	})
-		// 	.then((user) => {
-		// 		localStorage.setItem('user', JSON.stringify(user.email));
-		// 		history.push('/dashboard/');
-		// 		return dispatch(success(user));
-		// 	})
-		// 	.catch((err) => {
-		// 		alert(err);
-		// 		alert('Account or password is incorrect');
-		// 		return dispatch(failure());
-		// 	});
+		sendRequestWithJWTAuthHeaderAsync('post', email, uri, body)
+			.then((res) => {
+				const email = res.json();
+				dispatch(success({ email }));
+				window.location.href = '../dashboard';
+			})
+			.cahtch((err) => {
+				dispatch(failure());
+				console.log(err);
+				alert('Logging in has failed');
+			});
 	};
 
 	function request(user) {
@@ -68,34 +57,36 @@ function logout() {
 	return (dispatch) => dispatch({ type: userConstants.LOGOUT });
 }
 
-function signUp(email, password, name) {
+function register(email, password, name) {
 	return (dispatch) => {
 		if (!(email.length && password.length && name.length)) return;
 
 		dispatch(request());
 
-		const token = {
-			method: 'post',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({ email, password, name })
-		};
+		const body = JSON.stringify({ email, password });
 
-		fetch('http://localhost:3001/signup', token)
-			.then((res) => res.json())
-			.then((user) => {
-				if (user) {
-					//this.props.loadUserProfile(data);
-					return dispatch(success());
-				}
+		const uri = '/login';
+
+		sendRequestWithJWTAuthHeaderAsync('post', email, uri, body)
+			.then((res) => {
+				const email = res.json();
+				dispatch(success({ email }));
+				window.location.href = '../dashboard';
 			})
-			.catch((err) => {
-				console.log('Err msg is : ' + err);
-				alert('Something went wrong');
+			.cahtch((err) => {
 				dispatch(failure());
+				console.log(err);
+				alert('Logging in has failed');
 			});
 
-		const request = () => ({ type: userConstants.SIGNUP_REQUEST });
-		const success = () => ({ type: userConstants.SIGNUP_SUCESS });
-		const failure = () => ({ type: userConstants.SIGNUP_FAILURE });
+		function request() {
+			return { type: userConstants.SIGNUP_REQUEST };
+		}
+		function success() {
+			return { type: userConstants.SIGNUP_SUCESS };
+		}
+		function failure() {
+			return { type: userConstants.SIGNUP_FAILURE };
+		}
 	};
 }

@@ -12,8 +12,8 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = (dispatch) => {
 	return {
-		onUpdateCount: (count) => dispatch(countActions.submitCount(count)),
-		onRequestCount: () => dispatch(countActions.requestCount())
+		onUpdateCount: (count, email, gender, age, isIn) => dispatch(countActions.submitCount(count, email, gender, age, isIn)),
+		onRequestCount: (email) => dispatch(countActions.requestCount(email))
 	};
 };
 
@@ -33,7 +33,8 @@ class Counter extends Component {
 	}
 
 	componentDidMount() {
-		this.props.onRequestCount();
+		const { email, onRequestCount } = this.props;
+		onRequestCount(email);
 	}
 
 	handleAge(e) {
@@ -50,28 +51,32 @@ class Counter extends Component {
 
 	handleIn() {
 		console.log(this.props.email);
+		const { email, onUpdateCount } = this.props;
+		const { count, gender, age } = this.state;
 		this.setState(
 			{
-				count: this.state.count + 1
+				count: count + 1
 			},
 			() => {
-				this.props.onUpdateCount(this.state.count);
+				onUpdateCount(count, email, gender, age, true);
 			}
 		);
 		console.log(this.props.count);
 	}
 
 	handleOut() {
+		const { email, onUpdateCount } = this.props;
+		const { count, gender, age } = this.state;
 		this.setState(
 			{
-				count: this.state.count - 1
+				count: count - 1
 			},
 			() => {
-				this.props.onUpdateCount(this.state.count);
+				onUpdateCount(count, email, gender, age, false);
 			}
 		);
 		alert('THANKS FOR BEING WITH US');
-		console.log(this.props.count);
+		console.log(count);
 	}
 
 	render() {
@@ -192,9 +197,9 @@ class Counter extends Component {
 					</form>
 				</div>
 				<div className="tc">
-				<a onClick={this.handleOut} className="f6 link ph-cus pv3 grow no-underline br-pill ba bw1 mb3 mt3 dib black-80 center">
-					OUT
-				</a>
+					<a onClick={this.handleOut} className="f6 link ph-cus pv3 grow no-underline br-pill ba bw1 mb3 mt3 dib black-80 center">
+						OUT
+					</a>
 				</div>
 			</div>
 		);

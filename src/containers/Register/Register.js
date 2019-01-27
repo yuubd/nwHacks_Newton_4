@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { sendRequestWithJWTAuthHeaderAsync } from '../../_helpers/http';
+
 class Register extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			email: '',
-			password: ''
+			password: '',
+			shName: '',
+			shId: '',
+			capacity: ''
 		};
 		this.createRequest = this.createRequest.bind(this);
 		this.onEmailChange = this.onEmailChange.bind(this);
@@ -21,9 +26,22 @@ class Register extends Component {
 	}
 
 	createRequest() {
-		//var authorized = client.post(post.Registration)
-		window.location.href = '../postregistration';
+		const { email, password, shName, shId, capacity } = this.state;
+
+		const body = JSON.stringify({ email, password, shName, shId, capacity });
+		const uri = '/register';
+
+		sendRequestWithJWTAuthHeaderAsync('post', email, uri, body)
+			.then((res) => {
+				const email = res.json();
+				window.location.href = '../postregistration';
+			})
+			.cahtch((err) => {
+				console.log(err);
+				alert('Registering has failed');
+			});
 	}
+
 	render() {
 		return (
 			<div>
@@ -42,39 +60,40 @@ class Register extends Component {
 					<form className="registration">
 						<div className="bg-light-grey mw7 center pa4 br2-ns ba b--black-10">
 							<label htmlFor="name" className="f6 b db mb2">
-								Username <span className="normal black-60">(required)</span>
+								Email <span className="normal black-60">(required)</span>
 							</label>
-							<input id="name" className="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="name-desc" />
+							<input
+								onChange={this.handleChange}
+								id="email"
+								className="input-reset ba b--black-20 pa2 mb2 db w-100"
+								type="text"
+								aria-describedby="name-desc"
+							/>
 
-							<label htmlFor="name" className="f6 b db mb2">
+							<label onChange={this.handleChange} id="password" htmlFor="name" className="f6 b db mb2">
 								Password <span className="normal black-60">(required)</span>
 							</label>
-							<input id="name" className="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="name-desc" />
+							<input className="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="name-desc" />
 
-							<label htmlFor="name" className="f6 b db mb2">
+							<label onChange={this.handleChange} id="shName" htmlFor="name" className="f6 b db mb2">
 								Shelter Name <span className="normal black-60">(required)</span>
 							</label>
-							<input id="name" className="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="name-desc" />
+							<input className="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="name-desc" />
 
-							<label htmlFor="name" className="f6 b db mb2">
-								IDNumber <span className="normal black-60">(required)</span>
+							<label onChange={this.handleChange} id="shId" htmlFor="name" className="f6 b db mb2">
+								Shelter ID <span className="normal black-60">(required)</span>
 							</label>
-							<input id="name" className="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="name-desc" />
+							<input className="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="name-desc" />
 
-							<label htmlFor="name" className="f6 b db mb2">
+							<label onChange={this.handleChange} id="capacity" htmlFor="name" className="f6 b db mb2">
 								CapacityNumber <span className="normal black-60">(required)</span>
 							</label>
-							<input id="name" className="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="name-desc" />
-
-							<label htmlFor="name" className="f6 b db mb2">
-								Additional Info <span className="normal black-60">(optional)</span>
-							</label>
-							<input id="name" className="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="name-desc" />
+							<input className="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" aria-describedby="name-desc" />
 
 							<div className="tc">
-							<a onClick={this.createRequest} className="f6 grow no-underline br-pill ba bw1 ph3 pv2 mb2 dib black" href="#0">
-								Submit{' '}
-							</a>
+								<a onClick={this.createRequest} className="f6 grow no-underline br-pill ba bw1 ph3 pv2 mb2 dib black" href="#0">
+									Submit
+								</a>
 							</div>
 						</div>
 					</form>
