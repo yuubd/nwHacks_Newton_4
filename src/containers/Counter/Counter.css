@@ -1,0 +1,11 @@
+::-webkit-scrollbar {
+	display: none;
+}
+
+.mw-cus {
+	max-width: 24rem;
+}
+.ph-cus {
+	padding-left: 10rem;
+	padding-right: 10rem;
+}
