@@ -26,7 +26,7 @@ class PostRegistration extends Component {
 			</div>
 			</nav>
       <div className="dt h-100 w-100 absolute bg-black-60 center">
-        <div className="mt6">
+        <div className="mt6 tc">
           <header className="white-70">
             <h2 className="f6 fw1 ttu tracked mb2 lh-title">nwHacks2019</h2>
             <h3 className="f6 fw1 lh-title">January 26th</h3>

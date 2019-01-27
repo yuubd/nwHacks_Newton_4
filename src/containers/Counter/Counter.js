@@ -191,9 +191,11 @@ class Counter extends Component {
 						</div>
 					</form>
 				</div>
+				<div className="tc">
 				<a onClick={this.handleOut} className="f6 link ph-cus pv3 grow no-underline br-pill ba bw1 mb3 mt3 dib black-80 center">
 					OUT
 				</a>
+				</div>
 			</div>
 		);
 	}

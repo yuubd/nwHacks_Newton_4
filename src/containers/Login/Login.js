@@ -57,7 +57,7 @@ class Login extends Component {
 					</div>
 				</nav>
 				<div>
-					<h1>LOGIN</h1>
+					<h1 className="tc">LOGIN</h1>
 					<form className="registration">
 						<div className="bg-light-grey mw7 center pa4 br2-ns ba b--black-10">
 							<label htmlFor="name" className="f6 b db mb2">
@@ -81,10 +81,11 @@ class Login extends Component {
 								type="text"
 								aria-describedby="name-desc"
 							/>
-
+							<div className="tc">
 							<a onClick={this.handleSubmit} className="f6 grow no-underline br-pill ba bw1 ph3 pv2 mb2 dib black">
 								Submit
 							</a>
+							</div>
 						</div>
 					</form>
 				</div>
