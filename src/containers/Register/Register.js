@@ -9,7 +9,9 @@ class Register extends Component {
 
 	createRequest()
 	{
-  	console.log('request created');
+  	//var authorized = client.post(post.Registration)
+		window.location.href = "../postregistration"
+
 	}
 	render() {
 		return (
