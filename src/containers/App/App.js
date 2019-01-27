@@ -5,6 +5,7 @@ import logo from '../../logo.svg';
 import Login from '../../containers/Login/Login';
 import Register from '../../containers/Register/Register';
 import Home from '../../components/Home/Home';
+import Counter from '../Counter/Counter';
 import './App.css';
 
 class App extends Component {
@@ -14,6 +15,7 @@ class App extends Component {
 				<Router>
 					<Switch>
 						<Route exact path="/" component={Home} />
+						<Route exact path="/counter" component={Counter} />
 						<Route exact path="/login" component={Login} />
 						<Route exact path="/register" component={Register} />
 					</Switch>
