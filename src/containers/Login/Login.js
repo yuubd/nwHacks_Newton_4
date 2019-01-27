@@ -27,22 +27,22 @@ class Login extends Component {
 	render() {
 		return (
 			<div>
-				<nav className=" dt h-10 w-100 relative bg-black-80 center">
-					<div className="dtc v-mid tr pa3">
-						<Link
-							className="f6 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3"
-							to="/"
-						>
-							How it Works
-						</Link>
-						<Link
-							className="f6 fw4 hover-white no-underline white-70 dib ml2 pv2 ph3 ba"
-							to="/register"
-						>
-							Register
-						</Link>
-					</div>
-				</nav>
+			<nav className=" dt h-10 w-100 relative bg-black-80 center">
+				<div className="dtc v-mid tr pa3">
+					<Link
+						className="f6 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3"
+						to="/"
+					>
+						How it Works
+					</Link>
+					<Link
+						className="f6 fw4 hover-white no-underline white-70 dib ml2 pv2 ph3 ba"
+						to="/register"
+					>
+						Register
+					</Link>
+				</div>
+			</nav>
 				<main className="pa4 black-80">
 					<form className="measure center">
 						<fieldset id="sign_up" className="ba b--transparent ph0 mh0">
