@@ -1,5 +1,22 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { userActions } from '../../_actions/userActions';
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		requestLogin: (email, password) => {
+			dispatch(userActions.login(email, password));
+		}
+	};
+};
+
+const mapStateToProps = (state) => {
+	return {
+		email: state.auth.loggedIn
+	};
+};
+
 class Login extends Component {
 	constructor(props) {
 		super(props);
@@ -21,7 +38,9 @@ class Login extends Component {
 	}
 
 	handleSubmit() {
-		console.log('submit clicked!');
+		const { email, password } = this.state;
+		console.log(this.props.loggedIn);
+		this.props.requestLogin(email, password);
 	}
 
 	render() {
@@ -29,16 +48,10 @@ class Login extends Component {
 			<div>
 				<nav className="dt h-10 w-100 relative bg-black-80 center">
 					<div className="dtc v-mid tr pa3">
-						<Link
-							className="f6 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3"
-							to="/"
-						>
+						<Link className="f6 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" to="/">
 							How it Works
 						</Link>
-						<Link
-							className="f6 fw4 hover-white no-underline white-70 dib ml2 pv2 ph3 ba"
-							to="/register"
-						>
+						<Link className="f6 fw4 hover-white no-underline white-70 dib ml2 pv2 ph3 ba" to="/register">
 							Register
 						</Link>
 					</div>
@@ -95,4 +108,4 @@ class Login extends Component {
 	}
 }
 
-export default Login;
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
