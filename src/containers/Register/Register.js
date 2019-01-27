@@ -24,12 +24,6 @@ class Register extends Component {
 				</Link>
 				<Link
 					className="f6 fw4 hover-white no-underline white-70 dib ml2 pv2 ph3 ba"
-					to="/register"
-				>
-					Register
-				</Link>
-				<Link
-					className="f6 fw4 hover-white no-underline white-70 dib ml2 pv2 ph3 ba"
 					to="/login"
 				>
 					Login
