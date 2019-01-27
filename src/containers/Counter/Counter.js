@@ -1,6 +1,21 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { countActions } from '../../_actions/countActions';
 import './Counter.css';
+
+const mapStateToProps = (state) => {
+	return {
+		email: state.auth.user,
+		count: state.count.count
+	};
+};
+const mapDispatchToProps = (dispatch) => {
+	return {
+		onUpdateCount: (count) => dispatch(countActions.submitCount(count)),
+		onRequestCount: () => dispatch(countActions.requestCount())
+	};
+};
 
 class Counter extends Component {
 	constructor(props) {
@@ -17,37 +32,33 @@ class Counter extends Component {
 		this.handleIn = this.handleIn.bind(this);
 	}
 
+	componentDidMount() {
+		this.props.onRequestCount();
+	}
+
 	handleAge(e) {
-		this.setState(
-			{
-				age: e.target.id
-			},
-			() => {
-				console.log(this.state.age);
-			}
-		);
+		this.setState({
+			age: e.target.id
+		});
 	}
 
 	handleGender(e) {
-		this.setState(
-			{
-				gender: e.target.id
-			},
-			() => {
-				console.log(this.state.gender);
-			}
-		);
+		this.setState({
+			gender: e.target.id
+		});
 	}
 
 	handleIn() {
+		console.log(this.props.email);
 		this.setState(
 			{
 				count: this.state.count + 1
 			},
 			() => {
-				console.log(this.state.count);
+				this.props.onUpdateCount(this.state.count);
 			}
 		);
+		console.log(this.props.count);
 	}
 
 	handleOut() {
@@ -56,186 +67,131 @@ class Counter extends Component {
 				count: this.state.count - 1
 			},
 			() => {
-				console.log(this.state.count);
+				this.props.onUpdateCount(this.state.count);
 			}
 		);
+		alert('THANKS FOR BEING WITH US');
+		console.log(this.props.count);
 	}
 
 	render() {
+		console.log('this.props.count');
+		console.log(this.props.count);
 		return (
-			<div>
-				<nav className=" dt h-10 w-100 relative bg-black-80 center">
+			<div className="center">
+				<nav className="dt h-10 w-100 relative bg-black-80 center">
 					<div className="dtc v-mid tr pa3">
-						<Link
-							className="f6 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3"
-							to="/"
-						>
+						<Link className="f6 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" to="/">
 							How it Works
 						</Link>
-						<Link
-							className="f6 fw4 hover-white no-underline white-70 dib ml2 pv2 ph3 ba"
-							to="/dashboard"
-						>
+						<Link className="f6 fw4 hover-white no-underline white-70 dib ml2 pv2 ph3 ba" to="/dashboard">
 							DashBoard
 						</Link>
 					</div>
 				</nav>
 
-				<div className="ba mt4 mw-cus center">
+				<div className="bg-light-grey mt4 mw7 center pl4 pr4 br2-ns ba b--black-10">
 					<form className="pa0 ma0 black-80 w-100 center">
-						<div>
-							<p className="dim gray f5 f4-ns dib mr3">
-								Remaining: {this.state.count} !
-							</p>
-							<p className="dim gray f5 f4-ns dib mr3">You are almost there! </p>
-							<nav className="pv4 ph3">
-								<div className="nowrap overflow-x-auto ">
-									<a
-										id="male"
-										onClick={this.handleGender}
-										className="pointer link dim gray f5 f4-ns dib mr3"
-										title="Link 1"
-									>
-										Male
-									</a>
-									<a className="dim gray f5 f4-ns dib mr3">|</a>
-									<a
-										id="female"
-										onClick={this.handleGender}
-										className="pointer link dim gray f5 f4-ns dib mr3"
-										title="Link 2"
-									>
-										Female
-									</a>
-									<a className="dim gray f5 f4-ns dib mr3">|</a>
-									<a
-										id="preferred not"
-										onClick={this.handleGender}
-										className="pointer link dim gray f5 f4-ns dib mr3"
-										title="Link 3"
-									>
-										Preferred not
-									</a>
-								</div>
-							</nav>
-
-							<nav className="pv4 ph3">
-								<div className="nowrap overflow-x-auto ">
-									<a
-										className="pointer link dim gray f5 f4-ns dib mr3"
-										onClick={this.handleAge}
-										title="Link 1"
-										id="18"
-									>
-										~ 18
-									</a>
-									<a className="dim gray f5 f4-ns dib mr3">|</a>
+						<div className="bg-white black-80 tc pb0 avenir">
+							<p className="black-80 f5 f4-ns dib mr3">Remaining: {this.state.count} !</p>
+							<p className="black-80 f5 f4-ns dib mr3">You are almost there! </p>
+							<h2 className="mt2 mb0 mt4 f6 fw4 ttu tracked">Choose your gender</h2>
+							<div>
+								<a
+									id="male"
+									onClick={this.handleGender}
+									className="f4 f5-l pointer link bg-animate black-60 hover-bg-light-green dib pa3 ph4-l fw3"
+									title="Link 1"
+								>
+									Male
+								</a>
+								<a className="black-80 f5 f4-ns dib mr3 ml3">|</a>
+								<a
+									id="female"
+									onClick={this.handleGender}
+									className="f4 f5-l pointer link bg-animate black-60 hover-bg-light-yellow dib pa3 ph4-l fw3"
+									title="Link 2"
+								>
+									Female
+								</a>
+								<a className="black-80 f5 f4-ns dib mr3 ml3">|</a>
+								<a
+									id="preferred not"
+									onClick={this.handleGender}
+									className="f4 f5-l pointer link bg-animate black-60 hover-bg-light-red dib pa3 ph4-l fw3"
+									title="Link 3"
+								>
+									Preferred not
+								</a>
+							</div>
+							<div className="bg-white black-80 tc pv4 avenir">
+								<h2 className="mt2 mb0 f6 fw4 ttu tracked">Choose your age</h2>
+								<nav className="bt bb tc mw7 center mt3">
 									<a
 										onClick={this.handleAge}
-										className="pointer link dim gray f5 f4-ns dib mr3"
-										title="Link 2"
-										id="25"
+										id="1"
+										className="f6 f5-l link bg-animate black-80 hover-bg-lightest-blue dib pa3 ph4-l"
+										href="/"
 									>
-										~ 25
+										0 ~ 18
 									</a>
-									<a className="dim gray f5 f4-ns dib mr3">|</a>
 									<a
 										onClick={this.handleAge}
-										className="pointer link dim gray f5 f4-ns dib mr3"
-										title="Link 3"
-										id="30"
+										id="2"
+										className="f6 f5-l link bg-animate black-80 hover-bg-light-green dib pa3 ph4-l"
+										href="/portfolio"
 									>
-										~ 30
+										19 ~ 25
 									</a>
-									<a className="dim gray f5 f4-ns dib mr3">|</a>
 									<a
 										onClick={this.handleAge}
-										className="pointer link dim gray f5 f4-ns dib mr3"
-										title="Link 4"
-										id="35"
+										id="3"
+										className="f6 f5-l link bg-animate black-80 hover-bg-light-blue dib pa3 ph4-l"
+										href="/shop"
 									>
-										~ 35
+										26 ~ 30
 									</a>
-									<a className="dim gray f5 f4-ns dib mr3">|</a>
 									<a
 										onClick={this.handleAge}
-										className="pointer link dim gray f5 f4-ns dib mr3"
-										title="Link 5"
-										id="40"
+										id="4"
+										className="f6 f5-l link bg-animate black-80 hover-bg-light-pink dib pa3 ph4-l"
+										href="/about"
 									>
-										~ 40
+										31 ~ 40
 									</a>
-									<a className="dim gray f5 f4-ns dib mr3">|</a>
 									<a
 										onClick={this.handleAge}
-										className="pointer link dim gray f5 f4-ns dib mr3"
-										title="Link 6"
-										id="45"
+										id="5"
+										className="f6 f5-l link bg-animate black-80 hover-bg-light-yellow dib pa3 ph4-l"
+										href="/contact"
 									>
-										~ 45
+										41 ~ 50
 									</a>
-									<a className="dim gray f5 f4-ns dib mr3">|</a>
 									<a
 										onClick={this.handleAge}
-										className="pointer link dim gray f5 f4-ns dib mr3"
-										title="Link 7"
-										id="50"
+										id="6"
+										className="f6 f5-l link bg-animate black-80 hover-bg-light-yellow dib pa3 ph4-l"
+										href="/contact"
 									>
-										~ 50
+										51 ~ 60
 									</a>
-									<a className="dim gray f5 f4-ns dib mr3">|</a>
 									<a
 										onClick={this.handleAge}
-										className="pointer link dim gray f5 f4-ns dib mr3"
-										title="Link 8"
-										id="55"
+										id="7"
+										className="f6 f5-l link bg-animate black-80 hover-bg-light-yellow dib pa3 ph4-l"
+										href="/contact"
 									>
-										~ 55
+										61 ~
 									</a>
-									<a className="dim gray f5 f4-ns dib mr3">|</a>
-									<a
-										onClick={this.handleAge}
-										className="pointer link dim gray f5 f4-ns dib mr3"
-										title="Link 9"
-										id="60"
-									>
-										~ 60
-									</a>
-									<a className="dim gray f5 f4-ns dib mr3">|</a>
-									<a
-										onClick={this.handleAge}
-										className="pointer link dim gray f5 f4-ns dib mr3"
-										title="Link 10"
-										id="65"
-									>
-										~ 65
-									</a>
-									<a className="dim gray f5 f4-ns dib mr3">|</a>
-									<a
-										onClick={this.handleAge}
-										className="pointer link dim gray f5 f4-ns dib mr3"
-										title="Link 11"
-										id="66"
-									>
-										65+
-									</a>
-								</div>
-							</nav>
-							<a
-								onClick={this.handleIn}
-								className="f6 link dim ba ph-cus pv3 mb2 dib black"
-								href="#0"
-							>
-								IN
-							</a>
+								</nav>
+								<a onClick={this.handleIn} className="f6 link dim ph-cus pv3 grow no-underline br-pill ba bw1 mb1 mt5 dib black">
+									IN
+								</a>
+							</div>
 						</div>
 					</form>
 				</div>
-				<a
-					onClick={this.handleOut}
-					className="f6 link dim ba ph-cus pv3 ma2 dib black"
-					href="#0"
-				>
+				<a onClick={this.handleOut} className="f6 link ph-cus pv3 grow no-underline br-pill ba bw1 mb3 mt3 dib black-80 center">
 					OUT
 				</a>
 			</div>
@@ -243,4 +199,4 @@ class Counter extends Component {
 	}
 }
 
-export default Counter;
+export default connect(mapStateToProps, mapDispatchToProps)(Counter);

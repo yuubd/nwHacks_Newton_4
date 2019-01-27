@@ -4,6 +4,7 @@ import {RadialChart} from 'react-vis';
 
 const myData = [{angle:1}, {angle:1}, {angle:1}]
 
+
 class Dashboard extends Component {
 	render() {
 		return (

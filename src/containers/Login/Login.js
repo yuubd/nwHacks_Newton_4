@@ -1,5 +1,22 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { userActions } from '../../_actions/userActions';
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		requestLogin: (email, password) => {
+			dispatch(userActions.login(email, password));
+		}
+	};
+};
+
+const mapStateToProps = (state) => {
+	return {
+		email: state.auth.loggedIn
+	};
+};
+
 class Login extends Component {
 	constructor(props) {
 		super(props);
@@ -21,7 +38,9 @@ class Login extends Component {
 	}
 
 	handleSubmit() {
-		console.log('submit clicked!');
+		const { email, password } = this.state;
+		console.log(this.props.loggedIn);
+		this.props.requestLogin(email, password);
 	}
 
 	render() {
@@ -29,70 +48,49 @@ class Login extends Component {
 			<div>
 				<nav className="dt h-10 w-100 relative bg-black-80 center">
 					<div className="dtc v-mid tr pa3">
-						<Link
-							className="f6 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3"
-							to="/"
-						>
+						<Link className="f6 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" to="/">
 							How it Works
 						</Link>
-						<Link
-							className="f6 fw4 hover-white no-underline white-70 dib ml2 pv2 ph3 ba"
-							to="/register"
-						>
+						<Link className="f6 fw4 hover-white no-underline white-70 dib ml2 pv2 ph3 ba" to="/register">
 							Register
 						</Link>
 					</div>
 				</nav>
-				<main className="pa4 black-80">
-					<form className="measure center">
-						<fieldset id="sign_up" className="ba b--transparent ph0 mh0">
-							<legend className="f4 fw6 ph0 mh0">Login</legend>
-							<div className="mt3">
-								<label className="db fw6 lh-copy f6" htmlFor="email-address">
-									Email
-								</label>
-								<input
-									onChange={this.onEmailChange}
-									className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
-									type="email"
-									name="email-address"
-									id="email-address"
-								/>
-							</div>
-							<div className="mv3">
-								<label className="db fw6 lh-copy f6" htmlFor="password">
-									Password
-								</label>
-								<input
-									onChange={this.onPasswordChange}
-									className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
-									type="password"
-									name="password"
-									id="password"
-								/>
-							</div>
-						</fieldset>
-						<div className="">
+				<div>
+					<h1>LOGIN</h1>
+					<form className="registration">
+						<div className="bg-light-grey mw7 center pa4 br2-ns ba b--black-10">
+							<label htmlFor="name" className="f6 b db mb2">
+								Username
+							</label>
 							<input
-								onClick={this.handleSubmit}
-								className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
-								type="submit"
-								value="Log in"
+								onChange={this.onEmailChange}
+								id="name"
+								className="input-reset ba b--black-20 pa2 mb2 db w-100"
+								type="text"
+								aria-describedby="name-desc"
 							/>
-						</div>
-						<div className="lh-copy mt3">
-							<Link to="/register" className="f6 link dim black db">
-								Register
-							</Link>
-							<Link to="/" className="f6 link dim black db">
-								Forgot your password?
-							</Link>
+
+							<label htmlFor="name" className="f6 b db mb2">
+								Password
+							</label>
+							<input
+								onChange={this.onPasswordChange}
+								id="name"
+								className="input-reset ba b--black-20 pa2 mb2 db w-100"
+								type="text"
+								aria-describedby="name-desc"
+							/>
+
+							<a onClick={this.handleSubmit} className="f6 grow no-underline br-pill ba bw1 ph3 pv2 mb2 dib black">
+								Submit
+							</a>
 						</div>
 					</form>
-				</main>
+				</div>
 			</div>
 		);
 	}
 }
 
-export default Login;
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
