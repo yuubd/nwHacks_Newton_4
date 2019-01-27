@@ -3,7 +3,21 @@ import { Link } from 'react-router-dom';
 class Register extends Component {
 	constructor(props) {
 		super(props);
+		this.state = {
+			email: '',
+			password: ''
+		};
 		this.createRequest = this.createRequest.bind(this);
+		this.onEmailChange = this.onEmailChange.bind(this);
+		this.onPasswordChange = this.onPasswordChange.bind(this);
+	}
+
+	onEmailChange(e) {
+		this.setState({ email: e.target.value });
+	}
+
+	onPasswordChange(e) {
+		this.setState({ password: e.target.value });
 	}
 
 	createRequest() {
