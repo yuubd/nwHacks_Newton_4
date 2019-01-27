@@ -4,6 +4,7 @@
 	"private": true,
 	"dependencies": {
 		"body-parser": "^1.18.3",
+		"d3": "^5.7.0",
 		"nodemon": "^1.18.9",
 		"react": "^16.7.0",
 		"react-dom": "^16.7.0",
