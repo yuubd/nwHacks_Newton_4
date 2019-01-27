@@ -25,7 +25,7 @@ const mapDispatchToProps = (dispatch) => {
 class App extends Component {
 	render() {
 		return (
-			<div className="App">
+			<div className="black-80 avenir">
 				<Router>
 					<Switch>
 						<Route exact path="/" component={Home} />
