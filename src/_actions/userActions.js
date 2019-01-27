@@ -23,7 +23,7 @@ function login(email, password) {
 				dispatch(success({ email }));
 				window.location.href = '../dashboard';
 			})
-			.cahtch((err) => {
+			.catch((err) => {
 				dispatch(failure());
 				console.log(err);
 				alert('Logging in has failed');
@@ -38,18 +38,6 @@ function login(email, password) {
 	}
 	function failure() {
 		return { type: userConstants.LOGIN_FAILURE };
-	}
-	function getCircularReplacer() {
-		const seen = new WeakSet();
-		return (key, value) => {
-			if (typeof value === 'object' && value !== null) {
-				if (seen.has(value)) {
-					return;
-				}
-				seen.add(value);
-			}
-			return value;
-		};
 	}
 }
 
@@ -73,7 +61,7 @@ function register(email, password, name) {
 				dispatch(success({ email }));
 				window.location.href = '../dashboard';
 			})
-			.cahtch((err) => {
+			.catch((err) => {
 				dispatch(failure());
 				console.log(err);
 				alert('Logging in has failed');

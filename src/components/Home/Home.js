@@ -1,30 +1,30 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import vanUrl from './van.jpg';
+import vanUrl from './van.png';
 import './Home.css';
 class Home extends Component {
 	render() {
 		return (
 			<article>
+				<nav className=" dt h-10 w-100 relative bg-black-80 center">
+					<div className="dtc v-mid tr pa3">
+						<Link className="f6 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" to="/">
+							How it Works
+						</Link>
+						<Link className="f6 fw4 hover-white no-underline white-70 dib ml2 pv2 ph3 ba" to="/register">
+							Register
+						</Link>
+						<Link className="f6 fw4 hover-white no-underline white-70 dib ml2 pv2 ph3 ba" to="/login">
+							Login
+						</Link>
+					</div>
+				</nav>
 				<div
-					className="vh-100 flex-column w-100 tc relative white cover center min-h"
+					className="vh-100 flex-column w-100 tc relative white cover-ns cust1"
 					style={{
-						// backgroundImage: `url(${vanUrl})`
+						backgroundImage: `url(${vanUrl})`
 					}}
 				>
-					<nav className=" dt h-10 w-100 relative bg-black-80 center">
-						<div className="dtc v-mid tr pa3">
-							<Link className="f6 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" to="/">
-								How it Works
-							</Link>
-							<Link className="f6 fw4 hover-white no-underline white-70 dib ml2 pv2 ph3 ba" to="/register">
-								Register
-							</Link>
-							<Link className="f6 fw4 hover-white no-underline white-70 dib ml2 pv2 ph3 ba" to="/login">
-								Login
-							</Link>
-						</div>
-					</nav>
 					<div className="dt h-100 w-100 absolute bg-black-60 center">
 						<div className="mt6">
 							<header className="white-70">

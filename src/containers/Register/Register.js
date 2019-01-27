@@ -34,9 +34,10 @@ class Register extends Component {
 		sendRequestWithJWTAuthHeaderAsync('post', email, uri, body)
 			.then((res) => {
 				const email = res.json();
+				console.log(email);
 				window.location.href = '../postregistration';
 			})
-			.cahtch((err) => {
+			.catch((err) => {
 				console.log(err);
 				alert('Registering has failed');
 			});

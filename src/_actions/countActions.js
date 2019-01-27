@@ -16,7 +16,7 @@ function submitCount(count, email, genderId, ageId, isIn) {
 				const newCount = res.json();
 				dispatch(success({ newCount }));
 			})
-			.cahtch((err) => {
+			.catch((err) => {
 				dispatch(failure());
 				console.log(err);
 				alert('Count update request has failed');
@@ -35,35 +35,27 @@ function submitCount(count, email, genderId, ageId, isIn) {
 }
 
 function requestCount(email) {
+	console.log(email);
+	if (email == null) {
+		alert('Log in first');
+	}
 	return (dispatch) => {
 		dispatch(request());
 
 		dispatch(success({ count: 50 }));
 
-		sendRequestWithJWTAuthHeaderAsync('post', email, '/count', {})
+		const uri = '/count/' + email;
+
+		sendRequestWithJWTAuthHeaderAsync('get', email, uri, {})
 			.then((res) => {
 				const newCount = res.json();
 				dispatch(success({ newCount }));
 			})
-			.cahtch((err) => {
+			.catch((err) => {
 				dispatch(failure());
 				console.log(err);
 				alert('Count get request has failed');
 			});
-
-		// fetch('http://localhost:3001/login', token)
-		// 	.then((res) => {
-		// 		console.log(res);
-		// 		return res.json();
-		// 	})
-		// 	.then((count) => {
-		// 		return dispatch(success(count));
-		// 	})
-		// 	.catch((err) => {
-		// 		alert(err);
-		// 		alert('Updating count fails');
-		// 		return dispatch(failure());
-		// 	});
 	};
 
 	function request() {
