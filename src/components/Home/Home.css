@@ -1,0 +1,14 @@
+.measure-wide-custom {
+	max-width: 38em;
+}
+.h-10 {
+	height: 4em;
+}
+
+.h-90 {
+	height: 90%;
+}
+
+.min-h {
+	min-height: 395px;
+}
