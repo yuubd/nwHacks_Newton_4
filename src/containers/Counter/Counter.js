@@ -136,7 +136,7 @@ class Counter extends Component {
 										onClick={this.handleAge}
 										id="1"
 										className="f6 f5-l link bg-animate black-80 hover-bg-lightest-blue dib pa3 ph4-l"
-										href="/"
+										href="#0"
 									>
 										0 ~ 18
 									</a>
@@ -144,31 +144,21 @@ class Counter extends Component {
 										onClick={this.handleAge}
 										id="2"
 										className="f6 f5-l link bg-animate black-80 hover-bg-light-green dib pa3 ph4-l"
-										href="/portfolio"
+										href="#0"
 									>
 										19 ~ 25
 									</a>
-									<a
-										onClick={this.handleAge}
-										id="3"
-										className="f6 f5-l link bg-animate black-80 hover-bg-light-blue dib pa3 ph4-l"
-										href="/shop"
-									>
+									<a onClick={this.handleAge} id="3" className="f6 f5-l link bg-animate black-80 hover-bg-light-blue dib pa3 ph4-l" href="#0">
 										26 ~ 30
 									</a>
-									<a
-										onClick={this.handleAge}
-										id="4"
-										className="f6 f5-l link bg-animate black-80 hover-bg-light-pink dib pa3 ph4-l"
-										href="/about"
-									>
+									<a onClick={this.handleAge} id="4" className="f6 f5-l link bg-animate black-80 hover-bg-light-pink dib pa3 ph4-l" href="#0">
 										31 ~ 40
 									</a>
 									<a
 										onClick={this.handleAge}
 										id="5"
 										className="f6 f5-l link bg-animate black-80 hover-bg-light-yellow dib pa3 ph4-l"
-										href="/contact"
+										href="#0"
 									>
 										41 ~ 50
 									</a>
@@ -176,7 +166,7 @@ class Counter extends Component {
 										onClick={this.handleAge}
 										id="6"
 										className="f6 f5-l link bg-animate black-80 hover-bg-light-yellow dib pa3 ph4-l"
-										href="/contact"
+										href="#0"
 									>
 										51 ~ 60
 									</a>
@@ -184,7 +174,7 @@ class Counter extends Component {
 										onClick={this.handleAge}
 										id="7"
 										className="f6 f5-l link bg-animate black-80 hover-bg-light-yellow dib pa3 ph4-l"
-										href="/contact"
+										href="#0"
 									>
 										61 ~
 									</a>
