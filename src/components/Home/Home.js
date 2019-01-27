@@ -5,7 +5,7 @@ import './Home.css';
 class Counter extends Component {
 	render() {
 		return (
-			<article className="athelas">
+			<article>
 				<div
 					className="vh-100 flex-column w-100 tc relative white cover center min-h"
 					style={{
