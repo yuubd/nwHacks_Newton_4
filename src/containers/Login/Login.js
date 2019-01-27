@@ -56,53 +56,38 @@ class Login extends Component {
 						</Link>
 					</div>
 				</nav>
-				<main className="pa4 black-80">
-					<form className="measure center">
-						<fieldset id="sign_up" className="ba b--transparent ph0 mh0">
-							<legend className="f4 fw6 ph0 mh0">Login</legend>
-							<div className="mt3">
-								<label className="db fw6 lh-copy f6" htmlFor="email-address">
-									Email
-								</label>
-								<input
-									onChange={this.onEmailChange}
-									className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
-									type="email"
-									name="email-address"
-									id="email-address"
-								/>
-							</div>
-							<div className="mv3">
-								<label className="db fw6 lh-copy f6" htmlFor="password">
-									Password
-								</label>
-								<input
-									onChange={this.onPasswordChange}
-									className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
-									type="password"
-									name="password"
-									id="password"
-								/>
-							</div>
-						</fieldset>
-						<div className="">
+				<div>
+					<h1>LOGIN</h1>
+					<form className="registration">
+						<div className="bg-light-grey mw7 center pa4 br2-ns ba b--black-10">
+							<label htmlFor="name" className="f6 b db mb2">
+								Username
+							</label>
 							<input
-								onClick={this.handleSubmit}
-								className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
-								type="submit"
-								value="Log in"
+								onChange={this.onEmailChange}
+								id="name"
+								className="input-reset ba b--black-20 pa2 mb2 db w-100"
+								type="text"
+								aria-describedby="name-desc"
 							/>
-						</div>
-						<div className="lh-copy mt3">
-							<Link to="/register" className="f6 link dim black db">
-								Register
-							</Link>
-							<Link to="/" className="f6 link dim black db">
-								Forgot your password?
-							</Link>
+
+							<label htmlFor="name" className="f6 b db mb2">
+								Password
+							</label>
+							<input
+								onChange={this.onPasswordChange}
+								id="name"
+								className="input-reset ba b--black-20 pa2 mb2 db w-100"
+								type="text"
+								aria-describedby="name-desc"
+							/>
+
+							<a onClick={this.handleSubmit} className="f6 grow no-underline br-pill ba bw1 ph3 pv2 mb2 dib black">
+								Submit
+							</a>
 						</div>
 					</form>
-				</main>
+				</div>
 			</div>
 		);
 	}

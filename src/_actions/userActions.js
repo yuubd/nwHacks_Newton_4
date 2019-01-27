@@ -15,8 +15,8 @@ function login(email, password) {
 
 		dispatch(success({ email }));
 
-		history.push('/dashboard/');
-		// window.location.reload();
+		// history.push('../dashboard');
+		window.location.href = '../dashboard';
 
 		// const token = {
 		// 	method: 'post',
