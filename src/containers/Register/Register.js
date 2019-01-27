@@ -38,7 +38,7 @@ class Register extends Component {
 					</div>
 				</nav>
 				<div>
-					<h1>REGISTRATION PAGE</h1>
+					<h1>SIGN UP</h1>
 					<form className="registration">
 						<div className="bg-light-grey mw7 center pa4 br2-ns ba b--black-10">
 							<label htmlFor="name" className="f6 b db mb2">
